@@ -88,7 +88,35 @@ const About = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-3 gap-12 items-center mb-16">
+          {/* Profile Photo */}
+          <div className="flex justify-center lg:justify-start">
+            <div className="relative group">
+              <div className="w-64 h-64 rounded-full bg-gradient-card border border-card-border overflow-hidden shadow-soft group-hover:shadow-lg transition-all duration-300">
+                {/* Placeholder - substitua pela sua foto */}
+                <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
+                      <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-xs">Sua foto aqui</p>
+                  </div>
+                </div>
+                {/* Para adicionar sua foto, substitua o div acima por:
+                <img 
+                  src="/caminho-para-sua-foto.jpg" 
+                  alt="Foto de perfil" 
+                  className="w-full h-full object-cover"
+                />
+                */}
+              </div>
+              {/* Efeito de borda animada */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
+            </div>
+          </div>
+
           {/* Bio */}
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold text-primary">
