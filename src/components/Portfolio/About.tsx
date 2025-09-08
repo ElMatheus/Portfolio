@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Code, Palette, Zap, Heart } from 'lucide-react';
+import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 
 const skills = [
   {
@@ -30,6 +31,51 @@ const skills = [
 ];
 
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const AnimatedStat = ({ number, label, index }: { number: string; label: string; index: number }) => {
+    // Extract numeric value from string (e.g., "50+" -> 50)
+    const numericValue = number === '∞' ? 0 : parseInt(number.replace(/\D/g, ''));
+    const animatedValue = useCounterAnimation({ 
+      target: numericValue, 
+      duration: 2000 + (index * 200), // Stagger animations
+      trigger: isVisible 
+    });
+
+    const displayValue = number === '∞' ? '∞' : 
+                        number.includes('+') ? `${animatedValue}+` : 
+                        animatedValue.toString();
+
+    return (
+      <div className="text-center">
+        <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+          {displayValue}
+        </div>
+        <div className="text-muted-foreground">
+          {label}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -80,21 +126,19 @@ const About = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { number: '50+', label: 'Projetos' },
             { number: '5+', label: 'Anos de Experiência' },
             { number: '20+', label: 'Clientes Satisfeitos' },
             { number: '∞', label: 'Linhas de Código' }
           ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                {stat.number}
-              </div>
-              <div className="text-muted-foreground">
-                {stat.label}
-              </div>
-            </div>
+            <AnimatedStat 
+              key={index} 
+              number={stat.number} 
+              label={stat.label} 
+              index={index}
+            />
           ))}
         </div>
       </div>
