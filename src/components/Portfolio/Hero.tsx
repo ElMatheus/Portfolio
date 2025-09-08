@@ -2,31 +2,11 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import PixelBlast from '../PixelBlast';
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background with PixelBlast */}
       <div className="absolute inset-0 w-full h-full">
-        <PixelBlast
-          variant="circle"
-          pixelSize={6}
-          color="#B19EEF"
-          patternScale={3}
-          patternDensity={1.2}
-          pixelSizeJitter={0.5}
-          enableRipples
-          rippleSpeed={0.4}
-          rippleThickness={0.12}
-          rippleIntensityScale={1.5}
-          liquid
-          liquidStrength={0.12}
-          liquidRadius={1.2}
-          liquidWobbleSpeed={5}
-          speed={0.6}
-          edgeFade={0.25}
-          transparent
-        />
+        <PixelBlast variant="circle" pixelSize={6} color="#B19EEF" patternScale={3} patternDensity={1.2} pixelSizeJitter={0.5} enableRipples rippleSpeed={0.4} rippleThickness={0.12} rippleIntensityScale={1.5} liquid liquidStrength={0.12} liquidRadius={1.2} liquidWobbleSpeed={5} speed={0.6} edgeFade={0.25} transparent />
       </div>
 
       {/* Gradient Overlay */}
@@ -35,12 +15,8 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-            Desenvolvedor
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-light text-muted-foreground mb-6">
-            Full Stack
-          </h2>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">Matheus Gomes</h1>
+          <h2 className="text-3xl md:text-5xl font-light text-muted-foreground mb-6">Desenvolvedor Full Stack</h2>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Criando experiências digitais modernas e funcionais com código limpo e design intuitivo.
           </p>
@@ -74,8 +50,6 @@ const Hero = () => {
           <ArrowDown size={32} className="text-primary opacity-70" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
