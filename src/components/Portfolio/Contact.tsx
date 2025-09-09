@@ -9,19 +9,19 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email',
-    value: 'dev@exemplo.com',
-    href: 'mailto:dev@exemplo.com'
+    value: 'matheusgomesgoncalves.564@gmail.com',
+    href: 'mailto:matheusgomesgoncalves.564@gmail.com'
   },
   {
     icon: Phone,
     title: 'Telefone',
-    value: '+55 (11) 99999-9999',
-    href: 'tel:+5511999999999'
+    value: '+55 (19) 99465-7991',
+    href: 'tel:+5519994657991'
   },
   {
     icon: MapPin,
     title: 'Localização',
-    value: 'São Paulo, SP - Brasil',
+    value: 'Valinhos, SP - Brasil',
     href: '#'
   }
 ];
