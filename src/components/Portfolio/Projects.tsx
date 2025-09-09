@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github } from 'lucide-react';
+import GooeyNav from '@/hooks/useGooeyNav';
 
 const projects = [
   {
@@ -60,17 +61,23 @@ const projects = [
   }
 ];
 
-const categories = ['Todos', 'Full Stack', 'Frontend', 'Backend', 'Mobile'];
+const categories = [
+  { label: 'Todos', href: '#teste' },
+  { label: 'Full Stack', href: '#teste' },
+  { label: 'Frontend', href: '#teste' },
+  { label: 'Backend', href: '#teste' },
+  { label: 'Mobile', href: '#teste' }
+]
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = React.useState('Todos');
 
-  const filteredProjects = activeCategory === 'Todos' 
-    ? projects 
+  const filteredProjects = activeCategory === 'Todos'
+    ? projects
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section className="py-24 px-6 bg-muted/30">
+    <section id='teste' className="py-24 px-6 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -81,45 +88,49 @@ const Projects = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              onClick={() => setActiveCategory(category)}
-              className={`transition-smooth ${
-                activeCategory === category 
-                  ? 'bg-primary text-primary-foreground shadow-glow' 
-                  : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
-              }`}
-            >
-              {category}
-            </Button>
-          ))}
+         <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <GooeyNav
+
+            items={categories}
+
+            particleCount={15}
+
+            particleDistances={[90, 10]}
+
+            particleR={100}
+
+            initialActiveIndex={0}
+
+            animationTime={600}
+
+            timeVariance={300}
+
+            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+          />
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <Card key={index} className="group overflow-hidden bg-gradient-card border-card-border hover:shadow-purple transition-all duration-500">
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Quick Actions */}
                 <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a 
+                  <a
                     href={project.github}
                     className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
                   >
                     <Github size={18} />
                   </a>
-                  <a 
+                  <a
                     href={project.live}
                     className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
                   >
@@ -138,15 +149,15 @@ const Projects = () => {
                     {project.category}
                   </span>
                 </div>
-                
+
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
-                
+
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
-                    <span 
+                    <span
                       key={techIndex}
                       className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
                     >
@@ -157,15 +168,15 @@ const Projects = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="outline"
                     className="flex-1 border-primary/30 hover:bg-primary hover:text-primary-foreground"
                   >
                     <Github size={16} className="mr-2" />
                     Código
                   </Button>
-                  <Button 
+                  <Button
                     size="sm"
                     className="flex-1 bg-primary hover:bg-primary-dark"
                   >

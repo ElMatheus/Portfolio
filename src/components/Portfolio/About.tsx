@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Code, Palette, Zap, Heart } from 'lucide-react';
-import { useCounterAnimation } from '@/hooks/useCounterAnimation';
+import CountUp from '@/hooks/useCounterAnimation';
+import GradientText from '@/hooks/useGradientText';
 
 const skills = [
   {
@@ -52,22 +53,34 @@ const About = () => {
   }, []);
 
   const AnimatedStat = ({ number, label, index }: { number: string; label: string; index: number }) => {
-    // Extract numeric value from string (e.g., "50+" -> 50)
-    const numericValue = number === '∞' ? 0 : parseInt(number.replace(/\D/g, ''));
-    const animatedValue = useCounterAnimation({
-      target: numericValue,
-      duration: 2000 + (index * 200), // Stagger animations
-      trigger: isVisible
-    });
-
-    const displayValue = number === '∞' ? '∞' :
-      number.includes('+') ? `${animatedValue}+` :
-        animatedValue.toString();
+    // Remove '+' if present, keep '∞' as is
+    const numericValue = number === '∞' ? '∞' : parseFloat(number.replace('+', ''));
 
     return (
       <div className="text-center">
         <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-          {displayValue}
+          <GradientText
+            colors={['hsl(var(--primary))', 'hsl(var(--primary-dark)), hsl(var(--primary))', 'hsl(var(--primary-dark))', 'hsl(var(--primary))']}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            {numericValue === '∞' ? (
+              '∞'
+            ) : (
+              <div>
+                <CountUp
+                  from={0}
+                  to={numericValue}
+                  separator=","
+                  direction="up"
+                  duration={1}
+                  className="count-up-text"
+                />
+                +
+              </div>
+            )}
+          </GradientText>
         </div>
         <div className="text-muted-foreground">
           {label}
