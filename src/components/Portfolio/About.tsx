@@ -90,13 +90,13 @@ const About = () => {
   };
 
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Main Content - Clean Layout */}
-        <div className="flex flex-col items-center text-center space-y-8">
+        <div className="flex flex-col items-center text-center space-y-8 sm:space-y-12">
           {/* Large Profile Photo */}
           <div className="relative group">
-            <div className="w-80 h-80 rounded-full bg-gradient-card border border-card-border overflow-hidden shadow-soft group-hover:shadow-lg transition-all duration-500">
+            <div className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full bg-gradient-card border border-card-border overflow-hidden shadow-soft group-hover:shadow-lg transition-all duration-500">
               <img
                 src="/avatar.webp"
                 alt="Foto de perfil"
@@ -108,17 +108,17 @@ const About = () => {
           </div>
 
           {/* Tagline */}
-          <div className="space-y-4 max-w-2xl">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <div className="space-y-4 sm:space-y-6 max-w-4xl px-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Desenvolvedor Full-Stack
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
               Vasta experiência em tecnologias como JavaScript, PostgreSQL, Python e muito mais. Estou sempre atualizado com as melhores práticas e tendências do mercado.
             </p>
           </div>
 
           {/* Minimal Stats */}
-          <div ref={statsRef} className="grid grid-cols-4 gap-12 pt-8">
+          <div ref={statsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 pt-4 sm:pt-8 w-full max-w-4xl">
             {[
               { number: '50+', label: 'Projetos' },
               { number: '3+', label: 'Anos' },

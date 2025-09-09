@@ -49,35 +49,55 @@ const Hero = () => {
     <div className="absolute inset-0 bg-gradient-dark opacity-60" />
 
     {/* Content */}
-    <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-      <div className="mb-8 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">Matheus Gomes</h1>
-        <h2 className="text-3xl md:text-5xl font-light text-muted-foreground mb-6">Desenvolvedor Full Stack</h2>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+    <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      <div className="mb-8 sm:mb-12 animate-fade-in">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-primary bg-clip-text text-transparent">
+          Matheus Gomes
+        </h1>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-muted-foreground mb-4 sm:mb-6">
+          Desenvolvedor Full Stack
+        </h2>
+        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
           Criando experiências digitais modernas e funcionais com código limpo e design intuitivo.
         </p>
       </div>
 
       {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-        <Button size="lg" className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
+        <Button 
+          size="lg" 
+          className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple"
+        >
           Ver Projetos
         </Button>
-        <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth">
+        <Button 
+          variant="outline" 
+          size="lg" 
+          className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+        >
           Contato
         </Button>
       </div>
 
       {/* Social Links */}
-      <div className="flex gap-6 justify-center mb-16">
-        <a href="#" className="p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground">
-          <Github size={24} />
+      <div className="flex gap-4 sm:gap-6 justify-center mb-12 sm:mb-16">
+        <a 
+          href="#" 
+          className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
+        >
+          <Github size={20} className="sm:w-6 sm:h-6" />
         </a>
-        <a href="#" className="p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground">
-          <Linkedin size={24} />
+        <a 
+          href="#" 
+          className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
+        >
+          <Linkedin size={20} className="sm:w-6 sm:h-6" />
         </a>
-        <a href="#" className="p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground">
-          <Mail size={24} />
+        <a 
+          href="#" 
+          className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
+        >
+          <Mail size={20} className="sm:w-6 sm:h-6" />
         </a>
       </div>
 

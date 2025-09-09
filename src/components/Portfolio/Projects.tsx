@@ -77,40 +77,32 @@ const Projects = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id='teste' className="py-24 px-6 bg-muted/30">
+    <section id='teste' className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-6">Projetos</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Projetos</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Uma seleção dos meus trabalhos mais recentes, desde aplicações web completas até sistemas complexos.
           </p>
         </div>
 
         {/* Category Filter */}
-         <div className="flex flex-wrap justify-center gap-4 mb-12">
+         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
           <GooeyNav
-
             items={categories}
-
             particleCount={15}
-
             particleDistances={[90, 10]}
-
             particleR={100}
-
             initialActiveIndex={0}
-
             animationTime={600}
-
             timeVariance={300}
-
             colors={[1, 2, 3, 1, 2, 3, 1, 4]}
           />
         </div>
 
         {/* Projects Grid */}
-        <div  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project, index) => (
             <Card key={index} className="group overflow-hidden bg-gradient-card border-card-border hover:shadow-purple transition-all duration-500">
               {/* Project Image */}
@@ -118,12 +110,12 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-44 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Quick Actions */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Quick Actions - Hidden on mobile */}
+                <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     href={project.github}
                     className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
@@ -140,17 +132,17 @@ const Projects = () => {
               </div>
 
               {/* Project Info */}
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+              <div className="p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                  <h3 className="text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">
+                  <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full self-start">
                     {project.category}
                   </span>
                 </div>
 
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -167,7 +159,7 @@ const Projects = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button
                     size="sm"
                     variant="outline"
