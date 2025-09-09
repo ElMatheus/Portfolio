@@ -29,11 +29,24 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-card-border bg-muted/30">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted-foreground">
-            © 2024 Portfolio. Desenvolvido com ❤️ usando React e Tailwind CSS.
-          </p>
+      <footer className="py-12 px-6 border-t border-card-border/50">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-sm text-muted-foreground">
+              © 2024 • Desenvolvido com React & Tailwind
+            </div>
+            <div className="flex items-center gap-6">
+              <a href="mailto:contato@exemplo.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Email
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                LinkedIn
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                GitHub
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
