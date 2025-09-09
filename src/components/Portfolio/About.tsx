@@ -122,15 +122,11 @@ const About = () => {
             <h3 className="text-2xl font-semibold text-primary">
               Transformando ideias em código
             </h3>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                Com mais de 5 anos de experiência no desenvolvimento web, especializo-me em criar aplicações modernas e responsivas que combinam funcionalidade robusta com design elegante.
-              </p>
-              <p>
-                Minha abordagem é centrada no usuário, sempre priorizando a experiência e performance, utilizando as tecnologias mais atuais do mercado.
-              </p>
-              <p>
-                Quando não estou codando, gosto de explorar novas tecnologias, contribuir para projetos open source e compartilhar conhecimento com a comunidade.
+            <div className="text-muted-foreground leading-relaxed">
+              <p className="text-lg">
+                Desenvolvedor full-stack apaixonado por criar soluções elegantes e funcionais. 
+                Especializado em React, Next.js e tecnologias modernas, com foco em experiência 
+                do usuário e performance.
               </p>
             </div>
           </div>
