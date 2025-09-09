@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 interface GooeyNavItem {
   label: string;
-  href: string;
+  value: string;
 }
 
 export interface GooeyNavProps {
@@ -14,6 +14,7 @@ export interface GooeyNavProps {
   timeVariance?: number;
   colors?: number[];
   initialActiveIndex?: number;
+  onChange?: (value: string) => void;
 }
 
 const GooeyNav: React.FC<GooeyNavProps> = ({
@@ -24,7 +25,8 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   particleR = 100,
   timeVariance = 300,
   colors = [1, 2, 3, 1, 2, 3, 1, 4],
-  initialActiveIndex = 0
+  initialActiveIndex = 0,
+  onChange,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
@@ -78,7 +80,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         setTimeout(() => {
           try {
             element.removeChild(particle);
-          } catch {}
+          } catch { }
         }, t);
       }, 30);
     }
@@ -114,6 +116,9 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     if (filterRef.current) {
       makeParticles(filterRef.current);
     }
+    if (onChange) {
+      onChange(items[index].value); // <-- chama callback
+    }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, index: number) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -134,7 +139,24 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLElement;
     if (activeLi) {
       updateEffectPosition(activeLi);
-      textRef.current?.classList.add('active');
+      
+      // Limpar partículas existentes
+      if (filterRef.current) {
+        const particles = filterRef.current.querySelectorAll('.particle');
+        particles.forEach(p => filterRef.current!.removeChild(p));
+      }
+      
+      // Ativar animação do texto
+      if (textRef.current) {
+        textRef.current.classList.remove('active');
+        void textRef.current.offsetWidth; // Force reflow
+        textRef.current.classList.add('active');
+      }
+      
+      // Ativar animação das partículas
+      if (filterRef.current) {
+        makeParticles(filterRef.current);
+      }
     }
     const resizeObserver = new ResizeObserver(() => {
       const currentActiveLi = navRef.current?.querySelectorAll('li')[activeIndex] as HTMLElement;
@@ -145,6 +167,27 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
   }, [activeIndex]);
+
+  // Efeito para animação inicial
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!navRef.current || !containerRef.current) return;
+      const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLElement;
+      if (activeLi) {
+        updateEffectPosition(activeLi);
+        
+        if (textRef.current) {
+          textRef.current.classList.add('active');
+        }
+        
+        if (filterRef.current) {
+          makeParticles(filterRef.current);
+        }
+      }
+    }, 100); // Pequeno delay para garantir que os elementos estejam prontos
+
+    return () => clearTimeout(timer);
+  }, []); // Executar apenas uma vez na montagem
 
   return (
     <>
@@ -300,19 +343,19 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
-                  activeIndex === index ? 'active' : ''
-                }`}
-                
+                className={`transition-smooth cursor-pointer rounded-full p-2 ${activeIndex === index
+                    ? 'bg-black text-primary-foreground shadow-glow' 
+                    : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
+                  }`}
+                tabIndex={0}
+                onClick={e => handleClick(e as any, index)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleClick(e as any, index);
+                  }
+                }}
               >
-                <a
-                  href={item.href}
-                  onClick={e => handleClick(e, index)}
-                  onKeyDown={e => handleKeyDown(e, index)}
-                  className="outline-none py-[0.6em] px-[1em] inline-block"
-                >
-                  {item.label}
-                </a>
+                {item.label}
               </li>
             ))}
           </ul>

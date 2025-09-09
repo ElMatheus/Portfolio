@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github } from 'lucide-react';
@@ -62,22 +62,26 @@ const projects = [
 ];
 
 const categories = [
-  { label: 'Todos', href: '#teste' },
-  { label: 'Full Stack', href: '#teste' },
-  { label: 'Frontend', href: '#teste' },
-  { label: 'Backend', href: '#teste' },
-  { label: 'Mobile', href: '#teste' }
+  { label: 'Todos', value: 'all' },
+  { label: 'Full Stack', value: 'full_stack' },
+  { label: 'Frontend', value: 'frontend' },
+  { label: 'Backend', value: 'backend' },
+  { label: 'Mobile', value: 'mobile' }
 ]
 
+
+
 const Projects = () => {
-  const [activeCategory, setActiveCategory] = React.useState('Todos');
+  const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredProjects = activeCategory === 'Todos'
+  const filteredProjects = activeCategory === 'all'
     ? projects
-    : projects.filter(project => project.category === activeCategory);
-
+    : projects.filter(project => {
+        const categoryValue = project.category.toLowerCase().replace(' ', '_');
+        return categoryValue === activeCategory;
+      });
   return (
-    <section id='teste' className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -88,7 +92,7 @@ const Projects = () => {
         </div>
 
         {/* Category Filter */}
-         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
           <GooeyNav
             items={categories}
             particleCount={15}
@@ -98,6 +102,7 @@ const Projects = () => {
             animationTime={600}
             timeVariance={300}
             colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            onChange={setActiveCategory} 
           />
         </div>
 
