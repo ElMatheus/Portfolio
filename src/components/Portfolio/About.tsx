@@ -113,7 +113,7 @@ const About = () => {
               Desenvolvedor Full-Stack
             </h2>
             <p className="text-xl text-muted-foreground">
-              Criando experiências digitais modernas com código limpo e design elegante
+              Vasta experiência em tecnologias como JavaScript, PostgreSQL, Python e muito mais. Estou sempre atualizado com as melhores práticas e tendências do mercado.
             </p>
           </div>
 
@@ -121,8 +121,8 @@ const About = () => {
           <div ref={statsRef} className="grid grid-cols-4 gap-12 pt-8">
             {[
               { number: '50+', label: 'Projetos' },
-              { number: '5+', label: 'Anos' },
-              { number: '20+', label: 'Clientes' },
+              { number: '3+', label: 'Anos' },
+              { number: '10+', label: 'Clientes' },
               { number: '∞', label: 'Código' }
             ].map((stat, index) => (
               <AnimatedStat

@@ -33,16 +33,16 @@ const Index = () => {
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-sm text-muted-foreground">
-              © 2024 • Desenvolvido com React & Tailwind
+              © {new Date().getFullYear()} • Desenvolvido por Matheus Gomes
             </div>
             <div className="flex items-center gap-6">
-              <a href="mailto:contato@exemplo.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a target='_blank' href="mailto:matheusgomesgoncalves.564@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Email
               </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a target='_blank' href="https://www.linkedin.com/in/matheus-gomes-18a3b02b1" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 LinkedIn
               </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a target='_blank' href="https://github.com/ElMatheus" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 GitHub
               </a>
             </div>
