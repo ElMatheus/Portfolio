@@ -54,15 +54,15 @@ const About = () => {
   const AnimatedStat = ({ number, label, index }: { number: string; label: string; index: number }) => {
     // Extract numeric value from string (e.g., "50+" -> 50)
     const numericValue = number === '∞' ? 0 : parseInt(number.replace(/\D/g, ''));
-    const animatedValue = useCounterAnimation({ 
-      target: numericValue, 
+    const animatedValue = useCounterAnimation({
+      target: numericValue,
       duration: 2000 + (index * 200), // Stagger animations
-      trigger: isVisible 
+      trigger: isVisible
     });
 
-    const displayValue = number === '∞' ? '∞' : 
-                        number.includes('+') ? `${animatedValue}+` : 
-                        animatedValue.toString();
+    const displayValue = number === '∞' ? '∞' :
+      number.includes('+') ? `${animatedValue}+` :
+        animatedValue.toString();
 
     return (
       <div className="text-center">
@@ -84,24 +84,11 @@ const About = () => {
           {/* Large Profile Photo */}
           <div className="relative group">
             <div className="w-80 h-80 rounded-full bg-gradient-card border border-card-border overflow-hidden shadow-soft group-hover:shadow-lg transition-all duration-500">
-              {/* Placeholder - substitua pela sua foto */}
-              <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-10 h-10 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <p className="text-sm">Sua foto aqui</p>
-                </div>
-              </div>
-              {/* Para adicionar sua foto, substitua o div acima por:
-              <img 
-                src="/caminho-para-sua-foto.jpg" 
-                alt="Foto de perfil" 
+              <img
+                src="/avatar.webp"
+                alt="Foto de perfil"
                 className="w-full h-full object-cover"
               />
-              */}
             </div>
             {/* Glow effect */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-2xl"></div>
@@ -125,10 +112,10 @@ const About = () => {
               { number: '20+', label: 'Clientes' },
               { number: '∞', label: 'Código' }
             ].map((stat, index) => (
-              <AnimatedStat 
-                key={index} 
-                number={stat.number} 
-                label={stat.label} 
+              <AnimatedStat
+                key={index}
+                number={stat.number}
+                label={stat.label}
                 index={index}
               />
             ))}
