@@ -6,59 +6,41 @@ import GooeyNav from '@/hooks/useGooeyNav';
 
 const projects = [
   {
-    title: 'E-commerce Platform',
-    description: 'Plataforma completa de e-commerce com painel administrativo, sistema de pagamentos e gestão de estoque.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-    category: 'Full Stack',
-    github: '#',
-    live: '#'
+    name: 'newpack-website',
+    category: 'frontend',
   },
   {
-    title: 'Design System',
-    description: 'Sistema de design completo com componentes reutilizáveis, documentação interativa e tokens de design.',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop',
-    tech: ['Storybook', 'TypeScript', 'Figma', 'CSS-in-JS'],
-    category: 'Frontend',
-    github: '#',
-    live: '#'
+    name: 'HablaBien',
+    category: 'mobile',
   },
   {
-    title: 'Task Management App',
-    description: 'Aplicativo de gestão de tarefas com colaboração em tempo real, notificações e relatórios.',
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
-    tech: ['Next.js', 'Socket.io', 'MongoDB', 'PWA'],
-    category: 'Full Stack',
-    github: '#',
-    live: '#'
+    name: 'NEWPACK-backend-2.0',
+    category: 'backend',
   },
   {
-    title: 'Portfolio Website',
-    description: 'Site de portfólio moderno e responsivo com animações suaves e performance otimizada.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop',
-    tech: ['React', 'Tailwind', 'Framer Motion', 'Vercel'],
-    category: 'Frontend',
-    github: '#',
-    live: '#'
+    name: 'NEWPACK-app',
+    category: 'mobile',
   },
   {
-    title: 'API RESTful',
-    description: 'API robusta com autenticação JWT, documentação Swagger e testes automatizados.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop',
-    tech: ['Node.js', 'Express', 'JWT', 'Jest'],
-    category: 'Backend',
-    github: '#',
-    live: '#'
+    name: 'GestaoEsportiva-FRONTEND-LU',
+    category: 'frontend',
   },
   {
-    title: 'Mobile App',
-    description: 'Aplicativo mobile híbrido para gerenciamento de finanças pessoais com sincronização na nuvem.',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop',
-    tech: ['React Native', 'Firebase', 'Redux', 'Expo'],
-    category: 'Mobile',
-    github: '#',
-    live: '#'
-  }
+    name: 'overnote',
+    category: 'full_stack',
+  },
+  {
+    name: 'GestaoEsportiva-BACKEND',
+    category: 'backend',
+  },
+  {
+    name: 'planet-mobile',
+    category: 'mobile',
+  },
+  {
+    name: 'treino',
+    category: 'full_stack',
+  },
 ];
 
 const categories = [
@@ -73,13 +55,19 @@ const categories = [
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [projectsList, setProjectsList] = useState(null);
+
+  useEffect(() => {
+    const response = await
+  }, [activeCategory]);
+
 
   const filteredProjects = activeCategory === 'all'
     ? projects
     : projects.filter(project => {
-        const categoryValue = project.category.toLowerCase().replace(' ', '_');
-        return categoryValue === activeCategory;
-      });
+      const categoryValue = project.category.toLowerCase().replace(' ', '_');
+      return categoryValue === activeCategory;
+    });
   return (
     <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
@@ -102,7 +90,7 @@ const Projects = () => {
             animationTime={600}
             timeVariance={300}
             colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-            onChange={setActiveCategory} 
+            onChange={setActiveCategory}
           />
         </div>
 
