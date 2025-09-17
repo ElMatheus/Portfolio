@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github } from 'lucide-react';
 import GooeyNav from '@/hooks/useGooeyNav';
+import { fetchProjects } from '@/actions/api';
 
 const projects = [
   {
@@ -55,26 +56,46 @@ const categories = [
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [projectsList, setProjectsList] = useState(null);
+  const [projectsList, setProjectsList] = useState<any[]>([]);
 
   useEffect(() => {
-    const response = await
+    const fetchData = async () => {
+      const projectsData = [];
+
+      for (const project of projects) {
+        if (project.category === activeCategory || activeCategory === 'all') {
+          const response = await fetchProjects(project.name);
+          
+          if (response.total_count > 0) {
+            const projectData = {
+              ...project,
+              ...response.items[0],
+            };
+            projectsData.push(projectData);
+          } else {
+            console.warn(`Repositório ${project.name} não encontrado.`);
+          }
+        }
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
+      setProjectsList(projectsData);
+    }
+
+    fetchData();
   }, [activeCategory]);
 
+  const teste = () => {
+    console.log(projectsList);
+  }
 
-  const filteredProjects = activeCategory === 'all'
-    ? projects
-    : projects.filter(project => {
-      const categoryValue = project.category.toLowerCase().replace(' ', '_');
-      return categoryValue === activeCategory;
-    });
   return (
     <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Projetos</h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
+          <p onClick={teste} className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Uma seleção dos meus trabalhos mais recentes, desde aplicações web completas até sistemas complexos.
           </p>
         </div>
@@ -96,19 +117,19 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredProjects.map((project, index) => (
-            <Card key={index} className="group overflow-hidden bg-gradient-card border-card-border hover:shadow-purple transition-all duration-500">
+          {/* {filteredProjects.map((project, index) => (
+            <Card key={index} className="group overflow-hidden bg-gradient-card border-card-border hover:shadow-purple transition-all duration-500"> */}
               {/* Project Image */}
-              <div className="relative overflow-hidden">
+              {/* <div className="relative overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-44 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
 
                 {/* Quick Actions - Hidden on mobile */}
-                <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     href={project.github}
                     className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
@@ -122,10 +143,10 @@ const Projects = () => {
                     <ExternalLink size={18} />
                   </a>
                 </div>
-              </div>
+              </div> */}
 
               {/* Project Info */}
-              <div className="p-4 sm:p-6">
+              {/* <div className="p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                   <h3 className="text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors">
                     {project.title}
@@ -137,10 +158,10 @@ const Projects = () => {
 
                 <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
-                </p>
+                </p> */}
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                {/* <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
                     <span
                       key={techIndex}
@@ -149,10 +170,10 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
-                </div>
+                </div> */}
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button
                     size="sm"
                     variant="outline"
@@ -171,7 +192,7 @@ const Projects = () => {
                 </div>
               </div>
             </Card>
-          ))}
+          ))} */}
         </div>
       </div>
     </section>
