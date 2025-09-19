@@ -60,25 +60,44 @@ const Projects = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const cacheTime = 5 * 60 * 1000; // 5 minutos
       const projectsData = [];
 
       for (const project of projects) {
         if (project.category === activeCategory || activeCategory === 'all') {
-          const response = await fetchProjects(project.name);
+          const cacheKey = `github-project-${project.name}`;
+          const cachedProject = localStorage.getItem(cacheKey);
+
+          if (cachedProject) {
+            console.log(`Usando cache para o repositório ${project.name}`);
+            
+            const { data, timestamp } = JSON.parse(cachedProject);
+            if (Date.now() - timestamp < cacheTime) {
+              projectsData.push(data);
+              continue;
+            }
+          }
           
+          console.log("Buscando dados para o repositório", project.name);
+          
+          const response = await fetchProjects(project.name);
           if (response.total_count > 0) {
             const projectData = {
               ...project,
               ...response.items[0],
             };
             projectsData.push(projectData);
+
+            // Salvar no cache 
+            localStorage.setItem(cacheKey, JSON.stringify({
+              data: projectData,
+              timestamp: Date.now()
+            }));
           } else {
             console.warn(`Repositório ${project.name} não encontrado.`);
           }
         }
-        await new Promise(resolve => setTimeout(resolve, 150));
       }
-
       setProjectsList(projectsData);
     }
 
@@ -119,8 +138,8 @@ const Projects = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* {filteredProjects.map((project, index) => (
             <Card key={index} className="group overflow-hidden bg-gradient-card border-card-border hover:shadow-purple transition-all duration-500"> */}
-              {/* Project Image */}
-              {/* <div className="relative overflow-hidden">
+          {/* Project Image */}
+          {/* <div className="relative overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -128,8 +147,8 @@ const Projects = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
 
-                {/* Quick Actions - Hidden on mobile */}
-                {/* <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {/* Quick Actions - Hidden on mobile */}
+          {/* <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     href={project.github}
                     className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
@@ -145,8 +164,8 @@ const Projects = () => {
                 </div>
               </div> */}
 
-              {/* Project Info */}
-              {/* <div className="p-4 sm:p-6">
+          {/* Project Info */}
+          {/* <div className="p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
                   <h3 className="text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors">
                     {project.title}
@@ -160,8 +179,8 @@ const Projects = () => {
                   {project.description}
                 </p> */}
 
-                {/* Tech Stack */}
-                {/* <div className="flex flex-wrap gap-2 mb-4">
+          {/* Tech Stack */}
+          {/* <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
                     <span
                       key={techIndex}
@@ -172,8 +191,8 @@ const Projects = () => {
                   ))}
                 </div> */}
 
-                {/* Action Buttons */}
-                {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          {/* Action Buttons */}
+          {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button
                     size="sm"
                     variant="outline"
