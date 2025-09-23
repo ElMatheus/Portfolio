@@ -14,3 +14,17 @@ export async function fetchProjects(repo: string) {
     return [];
   }
 }
+
+export async function fetchTecnologiesProject(project: string) {
+  try {
+    const response = await axios.get(`https://api.github.com/repos/ElMatheus/${project}/languages`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return Object.keys(response.data);
+  } catch (error) {
+    console.error(`Não foi possível buscar as tecnologias do repositório ${project}:`);
+    return [];
+  }
+}
