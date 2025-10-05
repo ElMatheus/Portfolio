@@ -10,38 +10,51 @@ const projects = [
   {
     name: 'newpack-website',
     category: 'Frontend',
+    image: '/public/newpack-website-pic.png',
+    imagePosition: 'object-top'
   },
   {
     name: 'HablaBien',
     category: 'Mobile',
-  },
-  {
-    name: 'NEWPACK-backend-2.0',
-    category: 'Backend',
+    image: 'https://raw.githubusercontent.com/ElMatheus/HablaBien/refs/heads/master/assets/images/demonstration-home.png'
   },
   {
     name: 'NEWPACK-app',
     category: 'Mobile',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop'
+  },
+  {
+    name: 'NEWPACK-backend-2.0',
+    category: 'Backend',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop'
   },
   {
     name: 'GestaoEsportiva-FRONTEND-LU',
     category: 'Frontend',
+    image: 'https://raw.githubusercontent.com/ElMatheus/GestaoEsportiva-FRONTEND-LU/refs/heads/main/assets/imagens/campeonatosImage.png'
   },
   {
     name: 'overnote',
     category: 'Full_Stack',
+    image: '/public/overnote-pic.png',
+    imagePosition: 'object-left-top'
   },
   {
     name: 'GestaoEsportiva-BACKEND',
     category: 'Backend',
+    image: 'https://raw.githubusercontent.com/ElMatheus/GestaoEsportiva-FRONTEND-LU/refs/heads/main/assets/imagens/imgContainer.png',
+    imagePosition: 'object-bottom'
   },
   {
     name: 'planet-mobile',
     category: 'Mobile',
+    image: 'https://raw.githubusercontent.com/ElMatheus/planet-mobile/refs/heads/main/assets/exemploHome.png',
+    imagePosition: 'object-top'
   },
   {
     name: 'treino',
     category: 'Full_Stack',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop'
   },
 ];
 
@@ -61,7 +74,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const cacheTime = 5 * 60 * 1000; // 5 minutos
+      const cacheTime = 7 * 60 * 1000; // 5 minutos
       const projectsData = [];
 
       for (const project of projects) {
@@ -156,7 +169,7 @@ const Projects = () => {
                     <img
                       src={project.image}
                       alt={`Imagem do projeto ${project.name}`}
-                      className="w-full h-44 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                      className={`w-full h-44 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-700 ${project.imagePosition || 'object-center'}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -164,7 +177,9 @@ const Projects = () => {
                     <div className="absolute top-4 right-4 hidden sm:flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <a
                         href={project.html_url}
+                        target="_blank"
                         className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
+
                       >
                         <Github size={18} />
                       </a>
@@ -172,6 +187,7 @@ const Projects = () => {
                         project.homepage && (
                           <a
                             href={project.homepage}
+                            target="_blank"
                             className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
                           >
                             <ExternalLink size={18} />
@@ -188,7 +204,7 @@ const Projects = () => {
                         {project.name}
                       </h3>
                       <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full self-start">
-                        {project.category}
+                        {project.category.replace('_', ' ')}
                       </span>
                     </div>
 

@@ -3,7 +3,7 @@ const token = import.meta.env.VITE_GITHUB_TOKEN;
 
 export async function fetchProjects(repo: string) {
   try {
-    const response = await axios.get(`https://api.github.com/search/repositories?q=${repo}+user:ElMatheus`, {
+    const response = await axios.get(`https://api.github.com/search/repositories?q=${repo}+user:ElMatheus+fork:true`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
