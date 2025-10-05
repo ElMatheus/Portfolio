@@ -334,7 +334,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="flex gap-3 sm:gap-6 lg:gap-8 list-none p-0 px-2 sm:px-4 m-0 relative z-[3]"
+            className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 list-none p-0 px-1 sm:px-3 md:px-4 m-0 relative z-[3] overflow-x-auto scrollbar-hide"
             style={{
               color: 'white',
               textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)'
