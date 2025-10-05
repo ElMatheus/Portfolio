@@ -142,7 +142,7 @@ const Projects = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2">
+        <div className="flex justify-center mb-8 sm:mb-12 overflow-x-auto">
           <GooeyNav
             items={categories}
             particleCount={15}

@@ -197,6 +197,9 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
           :root {
             --linear-ease: linear(0, 0.068, 0.19 2.7%, 0.804 8.1%, 1.037, 1.199 13.2%, 1.245, 1.27 15.8%, 1.274, 1.272 17.4%, 1.249 19.1%, 0.996 28%, 0.949, 0.928 33.3%, 0.926, 0.933 36.8%, 1.001 45.6%, 1.013, 1.019 50.8%, 1.018 54.4%, 1 63.1%, 0.995 68%, 1.001 85%, 1);
           }
+          ul::-webkit-scrollbar {
+            display: none;
+          }
           .effect {
             position: absolute;
             opacity: 1;
@@ -334,16 +337,18 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 list-none p-0 px-1 sm:px-3 md:px-4 m-0 relative z-[3] overflow-x-auto scrollbar-hide"
+            className="flex gap-1.5 sm:gap-3 md:gap-4 lg:gap-6 list-none p-0 px-0 sm:px-2 m-0 relative z-[3] flex-nowrap overflow-x-auto"
             style={{
               color: 'white',
-              textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)'
+              textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
             }}
           >
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`transition-smooth cursor-pointer rounded-full px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-xs sm:text-sm md:text-base whitespace-nowrap ${activeIndex === index
+                className={`transition-smooth cursor-pointer rounded-full px-2.5 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-[11px] sm:text-sm md:text-base whitespace-nowrap flex-shrink-0 ${activeIndex === index
                     ? 'bg-black text-primary-foreground shadow-glow' 
                     : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
                   }`}
