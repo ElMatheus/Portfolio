@@ -48,17 +48,17 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-6">
+    <section id="contact" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-4xl font-bold mb-6">Vamos Conversar</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Tem um projeto em mente? Vamos discutir como posso ajudar a transformar sua ideia em realidade.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
@@ -72,9 +72,9 @@ const Contact = () => {
             </div>
 
             {/* Contact Methods */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {contactInfo.map((contact, index) => (
-                <Card key={index} className="p-6 bg-gradient-card border-card-border hover:shadow-soft transition-smooth group">
+                <Card key={index} className="p-4 sm:p-6 bg-gradient-card border-card-border hover:shadow-soft transition-smooth group">
                   <a
                     href={contact.href}
                     className="flex items-center gap-4 group-hover:text-primary transition-colors"
@@ -92,7 +92,7 @@ const Contact = () => {
             </div>
 
             {/* Additional Info */}
-            <div className="mt-8 p-6 bg-muted/50 rounded-lg">
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-muted/50 rounded-lg">
               <h4 className="font-semibold mb-3 text-primary">Disponibilidade</h4>
               <p className="text-muted-foreground leading-relaxed">
                 Atualmente disponível para novos projetos freelance e oportunidades de trabalho remoto.
@@ -102,7 +102,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="p-8 bg-gradient-card border-card-border">
+          <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-card border-card-border">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
