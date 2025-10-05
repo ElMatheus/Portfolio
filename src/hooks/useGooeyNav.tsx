@@ -343,7 +343,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`transition-smooth cursor-pointer rounded-full p-1.5 sm:p-2 text-sm sm:text-base ${activeIndex === index
+                className={`transition-smooth cursor-pointer rounded-full px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-xs sm:text-sm md:text-base whitespace-nowrap ${activeIndex === index
                     ? 'bg-black text-primary-foreground shadow-glow' 
                     : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
                   }`}
