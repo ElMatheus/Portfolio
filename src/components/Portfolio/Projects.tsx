@@ -168,12 +168,16 @@ const Projects = () => {
                       >
                         <Github size={18} />
                       </a>
-                      <a
-                        href={project.homepage}
-                        className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
+                      {
+                        project.homepage && (
+                          <a
+                            href={project.homepage}
+                            className="p-2 bg-card/90 backdrop-blur-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-smooth"
+                          >
+                            <ExternalLink size={18} />
+                          </a>
+                        )
+                      }
                     </div>
                   </div>
 
@@ -210,17 +214,34 @@ const Projects = () => {
                         size="sm"
                         variant="outline"
                         className="flex-1 border-primary/30 hover:bg-primary hover:text-primary-foreground"
+                        asChild
                       >
-                        <Github size={16} className="mr-2" />
-                        Código
+                        <a href={project.html_url} target="_blank" rel="noopener noreferrer">
+                          <Github size={16} className="mr-2" />
+                          Código
+                        </a>
                       </Button>
-                      <Button
-                        size="sm"
-                        className="flex-1 bg-primary hover:bg-primary-dark"
-                      >
-                        <ExternalLink size={16} className="mr-2" />
-                        Demo
-                      </Button>
+                      {project.homepage ? (
+                        <Button
+                          size="sm"
+                          className="flex-1 bg-primary hover:bg-primary-dark"
+                          asChild
+                        >
+                          <a href={project.homepage} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink size={16} className="mr-2" />
+                            Demo
+                          </a>
+                        </Button>
+                      ) : (
+                        <Button
+                          size="sm"
+                          className="flex-1 bg-primary hover:bg-primary-dark opacity-50 cursor-not-allowed"
+                          disabled
+                        >
+                          <ExternalLink size={16} className="mr-2" />
+                          Demo
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </Card>
