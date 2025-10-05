@@ -52,20 +52,20 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-4xl font-bold mb-6">Vamos Conversar</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Vamos Conversar</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Tem um projeto em mente? Vamos discutir como posso ajudar a transformar sua ideia em realidade.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold mb-6 text-primary">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-primary">
                 Entre em Contato
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
                 Estou sempre aberto a discutir novos projetos, oportunidades criativas ou parcerias.
                 Entre em contato e vamos criar algo incrível juntos.
               </p>
@@ -77,14 +77,14 @@ const Contact = () => {
                 <Card key={index} className="p-4 sm:p-6 bg-gradient-card border-card-border hover:shadow-soft transition-smooth group">
                   <a
                     href={contact.href}
-                    className="flex items-center gap-4 group-hover:text-primary transition-colors"
+                    className="flex items-center gap-3 sm:gap-4 group-hover:text-primary transition-colors"
                   >
-                    <div className="p-3 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-smooth">
-                      <contact.icon size={24} />
+                    <div className="p-2 sm:p-3 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-smooth">
+                      <contact.icon size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">{contact.title}</h4>
-                      <p className="text-muted-foreground">{contact.value}</p>
+                      <h4 className="font-semibold mb-1 text-sm sm:text-base">{contact.title}</h4>
+                      <p className="text-muted-foreground text-xs sm:text-sm break-all">{contact.value}</p>
                     </div>
                   </a>
                 </Card>
@@ -93,8 +93,8 @@ const Contact = () => {
 
             {/* Additional Info */}
             <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-muted/50 rounded-lg">
-              <h4 className="font-semibold mb-3 text-primary">Disponibilidade</h4>
-              <p className="text-muted-foreground leading-relaxed">
+              <h4 className="font-semibold mb-2 sm:mb-3 text-primary text-sm sm:text-base">Disponibilidade</h4>
+              <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm">
                 Atualmente disponível para novos projetos freelance e oportunidades de trabalho remoto.
                 Tempo de resposta: 24-48 horas.
               </p>
@@ -103,8 +103,8 @@ const Contact = () => {
 
           {/* Contact Form */}
           <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-card border-card-border">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Nome *
