@@ -48,7 +48,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-24 px-6">
+    <section id="contact" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -66,7 +66,7 @@ const Contact = () => {
                 Entre em Contato
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Estou sempre aberto a discutir novos projetos, oportunidades criativas ou parcerias. 
+                Estou sempre aberto a discutir novos projetos, oportunidades criativas ou parcerias.
                 Entre em contato e vamos criar algo incrível juntos.
               </p>
             </div>
@@ -75,7 +75,7 @@ const Contact = () => {
             <div className="space-y-6">
               {contactInfo.map((contact, index) => (
                 <Card key={index} className="p-6 bg-gradient-card border-card-border hover:shadow-soft transition-smooth group">
-                  <a 
+                  <a
                     href={contact.href}
                     className="flex items-center gap-4 group-hover:text-primary transition-colors"
                   >
@@ -95,7 +95,7 @@ const Contact = () => {
             <div className="mt-8 p-6 bg-muted/50 rounded-lg">
               <h4 className="font-semibold mb-3 text-primary">Disponibilidade</h4>
               <p className="text-muted-foreground leading-relaxed">
-                Atualmente disponível para novos projetos freelance e oportunidades de trabalho remoto. 
+                Atualmente disponível para novos projetos freelance e oportunidades de trabalho remoto.
                 Tempo de resposta: 24-48 horas.
               </p>
             </div>
@@ -169,9 +169,9 @@ const Contact = () => {
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                size="lg" 
+              <Button
+                type="submit"
+                size="lg"
                 className="w-full bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple"
               >
                 <Send size={20} className="mr-2" />

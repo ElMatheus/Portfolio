@@ -64,37 +64,42 @@ const Hero = () => {
 
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
-        <Button 
-          size="lg" 
+        <Button
+          size="lg"
           className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple"
+          asChild
         >
-          Ver Projetos
+          <a href="#projects">Ver Projetos</a>
         </Button>
-        <Button 
-          variant="outline" 
-          size="lg" 
+        <Button
+          variant="outline"
+          size="lg"
           className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+          asChild
         >
-          Contato
+          <a href="#contact">Contato</a>
         </Button>
       </div>
 
       {/* Social Links */}
       <div className="flex gap-4 sm:gap-6 justify-center mb-12 sm:mb-16">
-        <a 
-          href="#" 
+        <a
+          href="https://github.com/ElMatheus"
+          target="_blank"
           className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
         >
           <Github size={20} className="sm:w-6 sm:h-6" />
         </a>
-        <a 
-          href="#" 
+        <a
+          href="https://www.linkedin.com/in/matheus-gomes-18a3b02b1"
+          target="_blank"
           className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
         >
           <Linkedin size={20} className="sm:w-6 sm:h-6" />
         </a>
-        <a 
-          href="#" 
+        <a
+          href="mailto:matheusgomesgoncalves.564@gmail.com"
+          target="_blank"
           className="p-2 sm:p-3 rounded-full bg-card hover:bg-primary transition-smooth text-muted-foreground hover:text-primary-foreground"
         >
           <Mail size={20} className="sm:w-6 sm:h-6" />
