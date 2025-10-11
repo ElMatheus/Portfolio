@@ -122,10 +122,6 @@ const Projects = () => {
     fetchData();
   }, [activeCategory]);
 
-  const teste = () => {
-    console.log(projectsList);
-  }
-
   const filteredProjectsCount = activeCategory === 'all'
     ? projects.length
     : projects.filter(p => p.category.toLowerCase() === activeCategory).length;
@@ -136,13 +132,13 @@ const Projects = () => {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Projetos</h2>
-          <p onClick={teste} className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Uma seleção dos meus trabalhos mais recentes, desde aplicações web completas até sistemas complexos.
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex justify-center mb-8 sm:mb-12 overflow-x-auto">
+        <div className="flex justify-center mb-8 sm:mb-12 ">
           <GooeyNav
             items={categories}
             particleCount={15}

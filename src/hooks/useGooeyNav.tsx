@@ -139,20 +139,20 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLElement;
     if (activeLi) {
       updateEffectPosition(activeLi);
-      
+
       // Limpar partículas existentes
       if (filterRef.current) {
         const particles = filterRef.current.querySelectorAll('.particle');
         particles.forEach(p => filterRef.current!.removeChild(p));
       }
-      
+
       // Ativar animação do texto
       if (textRef.current) {
         textRef.current.classList.remove('active');
         void textRef.current.offsetWidth; // Force reflow
         textRef.current.classList.add('active');
       }
-      
+
       // Ativar animação das partículas
       if (filterRef.current) {
         makeParticles(filterRef.current);
@@ -175,11 +175,11 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
       const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLElement;
       if (activeLi) {
         updateEffectPosition(activeLi);
-        
+
         if (textRef.current) {
           textRef.current.classList.add('active');
         }
-        
+
         if (filterRef.current) {
           makeParticles(filterRef.current);
         }
@@ -349,8 +349,8 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
               <li
                 key={index}
                 className={`transition-smooth cursor-pointer rounded-full px-2.5 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-[11px] sm:text-sm md:text-base whitespace-nowrap flex-shrink-0 ${activeIndex === index
-                    ? 'bg-black text-primary-foreground shadow-glow' 
-                    : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
+                  ? ' text-primary-foreground shadow-glow'
+                  : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
                   }`}
                 tabIndex={0}
                 onClick={e => handleClick(e as any, index)}
