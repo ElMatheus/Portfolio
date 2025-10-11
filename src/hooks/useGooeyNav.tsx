@@ -337,18 +337,16 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="flex gap-1.5 sm:gap-3 md:gap-4 lg:gap-6 list-none p-0 px-0 sm:px-2 m-0 relative z-[3] flex-nowrap overflow-x-auto"
+            className="flex gap-1 sm:gap-3 md:gap-4 lg:gap-6 list-none p-0 m-0 relative z-[3] flex-nowrap"
             style={{
               color: 'white',
               textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
             }}
           >
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`transition-smooth cursor-pointer rounded-full px-2.5 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-[11px] sm:text-sm md:text-base whitespace-nowrap flex-shrink-0 ${activeIndex === index
+                className={`transition-smooth cursor-pointer rounded-full px-2 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2.5 text-[10px] sm:text-sm md:text-base whitespace-nowrap flex-shrink-0 ${activeIndex === index
                   ? ' text-primary-foreground shadow-glow'
                   : 'border-primary/30 text-muted-foreground hover:text-primary hover:border-primary'
                   }`}

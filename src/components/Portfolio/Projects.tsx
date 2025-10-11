@@ -138,18 +138,22 @@ const Projects = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex justify-center mb-8 sm:mb-12 ">
-          <GooeyNav
-            items={categories}
-            particleCount={15}
-            particleDistances={[90, 10]}
-            particleR={100}
-            initialActiveIndex={0}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-            onChange={setActiveCategory}
-          />
+        <div className="relative mb-8 sm:mb-12 w-full overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-muted/30 to-transparent pointer-events-none z-10 sm:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-muted/30 to-transparent pointer-events-none z-10 sm:hidden" />
+          <div className="flex justify-center overflow-x-auto px-4 sm:px-0">
+            <GooeyNav
+              items={categories}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              initialActiveIndex={0}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+              onChange={setActiveCategory}
+            />
+          </div>
         </div>
 
         {/* Projects Grid */}
