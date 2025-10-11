@@ -137,8 +137,8 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Category Filter - Desktop */}
-        <div className="hidden sm:flex justify-center mb-8 sm:mb-12">
+        {/* Category Filter */}
+        <div className="flex justify-center mb-8 sm:mb-12 px-4 sm:px-0">
           <GooeyNav
             items={categories}
             particleCount={15}
@@ -150,23 +150,6 @@ const Projects = () => {
             colors={[1, 2, 3, 1, 2, 3, 1, 4]}
             onChange={setActiveCategory}
           />
-        </div>
-
-        {/* Category Filter - Mobile */}
-        <div className="sm:hidden mb-8 px-4">
-          <div className="grid grid-cols-2 gap-2">
-            {categories.map((category, index) => (
-              <Button
-                key={category.value}
-                onClick={() => setActiveCategory(category.value)}
-                variant={activeCategory === category.value ? "default" : "outline"}
-                size="sm"
-                className="w-full transition-all"
-              >
-                {category.label}
-              </Button>
-            ))}
-          </div>
         </div>
 
         {/* Projects Grid */}
