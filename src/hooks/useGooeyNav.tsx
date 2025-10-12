@@ -337,7 +337,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="grid grid-cols-2 gap-2 sm:flex sm:gap-3 md:gap-4 lg:gap-6 list-none p-0 m-0 relative z-[3] sm:flex-nowrap w-full sm:w-auto"
+            className="grid grid-cols-3 gap-3 sm:flex md:gap-4 lg:gap-6 list-none p-0 m-0 relative z-[3] sm:flex-nowrap"
             style={{
               color: 'white',
               textShadow: '0 1px 1px hsl(205deg 30% 10% / 0.2)',
