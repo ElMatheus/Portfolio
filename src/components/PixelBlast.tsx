@@ -385,6 +385,12 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
     composer?: EffectComposer;
     touch?: ReturnType<typeof createTouchTexture>;
     liquidEffect?: Effect;
+    visibilityObserver?: IntersectionObserver;
+    visibilityHandler?: () => void;
+    pointerMoveRaf?: number;
+    pointerMoveData?: { fx: number; fy: number; w: number; h: number } | null;
+    pointerDownListener?: (e: PointerEvent) => void;
+    pointerMoveListener?: (e: PointerEvent) => void;
   } | null>(null);
   const prevConfigRef = useRef<any>(null);
   useEffect(() => {
@@ -405,6 +411,13 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
     if (mustReinit) {
       if (threeRef.current) {
         const t = threeRef.current;
+        if (t.pointerMoveRaf) cancelAnimationFrame(t.pointerMoveRaf);
+        if (t.pointerDownListener)
+          t.renderer.domElement.removeEventListener('pointerdown', t.pointerDownListener);
+        if (t.pointerMoveListener)
+          t.renderer.domElement.removeEventListener('pointermove', t.pointerMoveListener);
+        t.visibilityObserver?.disconnect();
+        if (t.visibilityHandler) document.removeEventListener('visibilitychange', t.visibilityHandler);
         t.resizeObserver?.disconnect();
         cancelAnimationFrame(t.raf!);
         t.quad?.geometry.dispose();
@@ -423,10 +436,11 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         antialias,
         alpha: true
       });
-      renderer.domElement.style.width = '100%';
-      renderer.domElement.style.height = '100%';
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
       container.appendChild(renderer.domElement);
+  visibilityRef.current.visible = true;
       const uniforms = {
         uResolution: { value: new THREE.Vector2(0, 0) },
         uTime: { value: 0 },
@@ -540,10 +554,36 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         uniforms.uClickTimes.value[ix] = uniforms.uTime.value;
         if (threeRef.current) threeRef.current.clickIx = (ix + 1) % MAX_CLICKS;
       };
+      let pointerMoveRaf = 0;
+      let pointerMoveData: { fx: number; fy: number; w: number; h: number } | null = null;
       const onPointerMove = (e: PointerEvent) => {
         if (!touch) return;
-        const { fx, fy, w, h } = mapToPixels(e);
-        touch.addTouch({ x: fx / w, y: fy / h });
+        pointerMoveData = mapToPixels(e);
+        if (threeRef.current) threeRef.current.pointerMoveData = pointerMoveData;
+        if (!pointerMoveRaf) {
+          pointerMoveRaf = requestAnimationFrame(() => {
+            if (!touch || !pointerMoveData) {
+              pointerMoveRaf = 0;
+              if (threeRef.current) {
+                threeRef.current.pointerMoveRaf = 0;
+                threeRef.current.pointerMoveData = null;
+              }
+              return;
+            }
+            const { fx, fy, w, h } = pointerMoveData;
+            touch.addTouch({ x: fx / w, y: fy / h });
+            pointerMoveRaf = 0;
+            pointerMoveData = null;
+            if (threeRef.current) {
+              threeRef.current.pointerMoveRaf = 0;
+              threeRef.current.pointerMoveData = null;
+            }
+          });
+          if (threeRef.current) {
+            threeRef.current.pointerMoveRaf = pointerMoveRaf;
+            threeRef.current.pointerMoveData = pointerMoveData;
+          }
+        }
       };
       renderer.domElement.addEventListener('pointerdown', onPointerDown, {
         passive: true
@@ -551,6 +591,20 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       renderer.domElement.addEventListener('pointermove', onPointerMove, {
         passive: true
       });
+      let containerInView = true;
+      const intersectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.target === container) {
+            containerInView = entry.isIntersecting;
+            visibilityRef.current.visible = containerInView && !document.hidden;
+          }
+        });
+      }, { threshold: 0.1 });
+      intersectionObserver.observe(container);
+      const onVisibilityChange = () => {
+        visibilityRef.current.visible = containerInView && !document.hidden;
+      };
+      document.addEventListener('visibilitychange', onVisibilityChange);
       let raf = 0;
       const animate = () => {
         if (autoPauseOffscreen && !visibilityRef.current.visible) {
@@ -588,7 +642,13 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         timeOffset,
         composer,
         touch,
-        liquidEffect
+        liquidEffect,
+        visibilityObserver: intersectionObserver,
+        visibilityHandler: onVisibilityChange,
+        pointerMoveRaf,
+        pointerMoveData,
+        pointerDownListener: onPointerDown,
+        pointerMoveListener: onPointerMove
       };
     } else {
       const t = threeRef.current!;
@@ -618,6 +678,13 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       if (threeRef.current && mustReinit) return;
       if (!threeRef.current) return;
       const t = threeRef.current;
+      if (t.pointerMoveRaf) cancelAnimationFrame(t.pointerMoveRaf);
+      if (t.pointerDownListener)
+        t.renderer.domElement.removeEventListener('pointerdown', t.pointerDownListener);
+      if (t.pointerMoveListener)
+        t.renderer.domElement.removeEventListener('pointermove', t.pointerMoveListener);
+      t.visibilityObserver?.disconnect();
+      if (t.visibilityHandler) document.removeEventListener('visibilitychange', t.visibilityHandler);
       t.resizeObserver?.disconnect();
       cancelAnimationFrame(t.raf!);
       t.quad?.geometry.dispose();

@@ -7,41 +7,21 @@ const Hero = () => {
     {/* Background with PixelBlast */}
     <div className="absolute inset-0 w-full h-full">
       <PixelBlast
-
-        variant="circle"
-
-        pixelSize={6}
-
+        variant="diamond"
+        pixelSize={4}
         color="#B19EEF"
-
-        patternScale={3}
-
-        patternDensity={1.2}
-
+        patternScale={6}
+        patternDensity={0.5}
         pixelSizeJitter={0.5}
-
-        enableRipples
-
         rippleSpeed={0.4}
-
         rippleThickness={0.12}
-
         rippleIntensityScale={1.5}
-
-        liquid
-
         liquidStrength={0.12}
-
         liquidRadius={1.2}
-
-        liquidWobbleSpeed={5}
-
+        liquidWobbleSpeed={10}
         speed={0.6}
-
         edgeFade={0.25}
-
         transparent
-
       />
     </div>
 
