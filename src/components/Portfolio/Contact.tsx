@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { handleSendEmail } from '@/actions/email';
+import { useToast } from '@/hooks/use-toast';
 
 const contactInfo = [
   {
@@ -27,17 +29,52 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+  const [status, setStatus] = React.useState<null | 'SUCCESS' | 'ERROR' | 'SENDING'>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setStatus('SENDING');
+    
+    toast({
+      title: "Enviando mensagem...",
+      description: "Por favor, aguarde enquanto processamos sua mensagem.",
+    });
+
+    try {
+      await handleSendEmail(formData);
+      setStatus('SUCCESS');
+      
+      toast({
+        title: "Mensagem enviada com sucesso!",
+        description: "Obrigado pelo contato! Responderei em breve.",
+        variant: "default",
+      });
+      
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      setStatus('ERROR');
+      console.error("Erro ao enviar o email:", error);
+      
+      toast({
+        title: "Erro ao enviar mensagem",
+        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente ou entre em contato diretamente pelo email.",
+        variant: "destructive",
+      });
+    } finally {
+      setTimeout(() => setStatus(null), 3000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -172,7 +209,8 @@ const Contact = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple"
+                className={`w-full bg-primary hover:bg-primary-dark text-primary-foreground shadow-glow transition-all duration-300 hover:shadow-purple focus:shadow-purple ${status === 'SENDING' ? 'cursor-not-allowed opacity-70' : ''}`}
+                disabled={status === 'SENDING'}
               >
                 <Send size={20} className="mr-2" />
                 Enviar Mensagem
