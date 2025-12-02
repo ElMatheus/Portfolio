@@ -31,4 +31,4 @@ Sinta-se à vontade para enviar uma mensagem ou iniciar uma conversa!
 ---
 
 ## Acesse Meu Portfólio
-**Link:** https://portfolio-af5mi2kgv-pravels-projects.vercel.app/
+**Link:** https://portfolio-pravels-projects.vercel.app/
