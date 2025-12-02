@@ -10,7 +10,7 @@ const projects = [
   {
     name: 'newpack-website',
     category: 'Frontend',
-    image: '/public/newpack-website-pic.png',
+    image: '/newpack-website-pic.png',
     imagePosition: 'object-top'
   },
   {
@@ -36,7 +36,7 @@ const projects = [
   {
     name: 'overnote',
     category: 'Full_Stack',
-    image: '/public/overnote-pic.png',
+    image: '/overnote-pic.png',
     imagePosition: 'object-left-top'
   },
   {
