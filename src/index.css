@@ -5,7 +5,16 @@
 /* Dark Portfolio Design System - Minimalista & Moderno */
 
 @layer base {
+  /* Base variables (shared) */
   :root {
+    --radius: 0.75rem;
+    --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Dark Theme (Default) */
+  :root,
+  .dark {
     /* Particules */
     --color-1: #b399e6;
     --color-2: #3b82f680;
@@ -55,9 +64,6 @@
     --input: 220 15% 12%;
     --ring: 260 60% 75%;
 
-    /* Layout */
-    --radius: 0.75rem;
-
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     --gradient-dark: linear-gradient(180deg, hsl(var(--background)), hsl(220 15% 4%));
@@ -67,10 +73,68 @@
     --shadow-purple: 0 20px 50px hsl(var(--primary) / 0.15);
     --shadow-soft: 0 10px 30px hsl(220 15% 3% / 0.5);
     --glow-primary: 0 0 30px hsl(var(--primary-glow) / 0.3);
+  }
 
-    /* Animation Variables */
-    --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Light Theme */
+  .light {
+    /* Particules - darker for light mode */
+    --color-1: #7c5bbf;
+    --color-2: #2563eb80;
+    --color-3: #7c5bbf;
+    --color-4: #db277780;
+
+    /* Light Base Colors */
+    --background: 220 20% 97%;
+    --foreground: 220 15% 10%;
+
+    /* Card System */
+    --card: 220 20% 100%;
+    --card-foreground: 220 15% 10%;
+    --card-border: 220 15% 88%;
+
+    /* Interactive Elements */
+    --popover: 220 20% 100%;
+    --popover-foreground: 220 15% 10%;
+
+    /* Primary Purple Theme - mais saturado para light */
+    --primary: 260 65% 55%;
+    --primary-foreground: 220 20% 98%;
+    --primary-glow: 260 70% 65%;
+    --primary-dark: 260 50% 40%;
+
+    /* Secondary */
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 15% 25%;
+
+    /* Muted Elements */
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent Colors */
+    --accent: 280 60% 55%;
+    --accent-foreground: 220 20% 98%;
+
+    /* Status Colors */
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 220 20% 98%;
+
+    --success: 150 60% 40%;
+    --warning: 40 85% 50%;
+
+    /* Borders & Inputs */
+    --border: 220 15% 85%;
+    --input: 220 15% 90%;
+    --ring: 260 65% 55%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--background)), hsl(220 15% 92%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(220 15% 95%));
+
+    /* Shadows & Effects */
+    --shadow-purple: 0 20px 50px hsl(var(--primary) / 0.12);
+    --shadow-soft: 0 10px 30px hsl(220 15% 50% / 0.1);
+    --glow-primary: 0 0 30px hsl(var(--primary-glow) / 0.2);
   }
 }
 
