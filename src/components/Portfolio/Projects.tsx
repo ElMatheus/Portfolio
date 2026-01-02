@@ -221,7 +221,7 @@ const Projects = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <div className="flex gap-2 sm:gap-3">
                       <Button
                         size="sm"
                         variant="outline"
